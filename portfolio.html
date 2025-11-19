@@ -1,0 +1,709 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CharithReddy Tatekalava Portfolio</title>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --brand:#ffb000;          /* warm yellow accent */
+      --brand-600:#ffa000;
+      --ink:#1e1e1e;            /* heading/body dark */
+      --muted:#6c757d;          /* muted grey */
+      --card:#f1f2f4;           /* soft card grey */
+      --bg:#f7f7f8;             /* page background */
+      --radius:1.25rem;         /* consistent rounded */
+    }
+
+    html{scroll-behavior:smooth}
+    body{
+      font-family:"Poppins", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--ink);
+      background:var(--bg);
+    }
+
+    /* Layout */
+    .shell{display:grid; grid-template-columns: 280px 1fr; gap:2rem;}
+    @media (max-width: 991.98px){ .shell{display:block;} }
+
+    /* LEFT SIDEBAR */
+    .side{
+      position:sticky; top:1.5rem; align-self:start; height:calc(100dvh - 3rem);
+      border-radius:var(--radius);
+      background:linear-gradient(180deg, var(--brand), var(--brand-600));
+      color:#111;
+      padding:1.25rem; box-shadow:0 10px 30px rgba(0,0,0,.08);
+    }
+    .avatar-xl{width:110px; height:110px; border-radius:100%; object-fit:cover; box-shadow:0 6px 18px rgba(0,0,0,.15); border:4px solid rgba(255,255,255,.6)}
+    .side .name{font-weight:700; letter-spacing:.5px}
+    .side .role{font-size:.8rem; opacity:.9}
+    .nav-vertical .nav-link{color:#111; font-weight:600; padding:.55rem .75rem; border-radius:999px; display:flex; align-items:center; gap:.6rem;}
+    .nav-vertical .nav-link .dot{width:7px;height:7px;border-radius:50%;background:#111;opacity:.5}
+    .nav-vertical .nav-link.active, .nav-vertical .nav-link:hover{background:#fff; color:#111}
+
+    /* HEADER (hero) */
+    .hero{border-radius:var(--radius); background:#fff; padding:2.25rem; box-shadow:0 10px 30px rgba(0,0,0,.06); position:relative; overflow:hidden}
+    .hero .halo{position:absolute; right:-140px; top:-140px; width:360px; height:360px; border:4px solid var(--brand); border-radius:50%; opacity:.6}
+    .hero-badge{font-weight:800; color:#ff8c00; letter-spacing:.03em}
+    .btn-dark-pill{border-radius:999px; padding:.7rem 1.1rem; font-weight:600}
+
+    /* SECTION WRAPPER */
+    section{scroll-margin-top:90px}
+    .section-card{background:#fff; border-radius:var(--radius); box-shadow:0 10px 30px rgba(0,0,0,.06);}
+
+    /* ABOUT */
+    .kpi{background:var(--card); border-radius: var(--radius); padding:1rem; text-align:center}
+    .kpi h3{font-weight:800; margin:0}
+    .kpi small{color:var(--muted)}
+    .service{display:flex; gap:.9rem; background:var(--card); border-radius:var(--radius); padding:1rem}
+    .service i{font-size:1.3rem}
+
+    /* RESUME */
+    .timeline{position:relative}
+    .timeline:before{content:""; position:absolute; left:16px; top:0; bottom:0; width:2px; background:#e4e6ea}
+    .tl-item{position:relative; padding-left:3.25rem; margin-bottom:1.25rem}
+    .tl-item:before{content:""; position:absolute; left:8px; top:.25rem; width:18px; height:18px; background:var(--brand); border-radius:50%; box-shadow:0 0 0 4px #fff}
+
+    /* PORTFOLIO */
+    .filter-btns .btn{border-radius:999px; font-weight:600}
+    .portfolio-grid{display:grid; grid-template-columns: repeat(4, 1fr); gap:1rem}
+    @media (max-width: 1199.98px){ .portfolio-grid{grid-template-columns: repeat(3, 1fr);} }
+    @media (max-width: 767.98px){ .portfolio-grid{grid-template-columns: repeat(2, 1fr);} }
+    @media (max-width: 480px){ .portfolio-grid{grid-template-columns: 1fr;} }
+    .work{position:relative; overflow:hidden; border-radius:1rem; background:#ddd}
+    .work img{width:100%; height:210px; object-fit:cover; display:block; transition:transform .5s}
+    .work .badge{position:absolute; left:.65rem; top:.65rem}
+    .work .overlay{position:absolute; inset:0; background:rgba(0,0,0,.5); color:#fff; display:grid; place-items:end start; padding:1rem; opacity:0; transition:opacity .3s}
+    .work:hover img{transform:scale(1.05)}
+    .work:hover .overlay{opacity:1}
+
+    /* TESTIMONIALS */
+    .stars{color:#ffcf33}
+
+    /* CONTACT */
+    .contact-card{background:#fff; border-radius:var(--radius); box-shadow:0 10px 30px rgba(0,0,0,.06);}
+
+    /* RIGHT FLOAT ICONS */
+    .dock{position:fixed; right:14px; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:.6rem; z-index:1030}
+    .dock a{width:42px; height:42px; display:grid; place-items:center; border-radius:999px; background:#fff; color:#111; box-shadow:0 6px 16px rgba(0,0,0,.08)}
+    .dock a:hover{background:var(--brand)}
+
+    .badge-pill{border-radius:999px}
+    .muted{color:var(--muted)}
+    .divider{height:1px;background:#e9ecef}
+    .heading{font-weight:800; letter-spacing:.02em}
+
+    /* ==== FIX CASE STUDIES AND CONTACT OVERLAP ==== */
+#case-studies {
+  margin-bottom: 80px; /* add space before contact section */
+  position: relative;
+  z-index: 1;
+}
+
+#contact {
+  clear: both;
+  position: relative;
+  z-index: 0;
+  margin-top: 40px; /* ensures contact doesn’t overlap */
+}
+
+/* Optional cleanup: ensure cards take equal space */
+#case-studies > div {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  align-items: stretch;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#case-studies {
+  scroll-margin-top: 80px; /* adjust if top part gets cut off */
+}
+
+
+  </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#sideNav" data-bs-smooth-scroll="true" tabindex="0">
+
+  <!-- Floating action / socials on the right -->
+  <div class="dock d-none d-md-flex">
+    <a href="#home" title="Home"><i class="bi bi-house"></i></a>
+    <a href="#about" title="About"><i class="bi bi-person"></i></a>
+    <a href="#resume" title="Resume"><i class="bi bi-mortarboard"></i></a>
+    <a href="#portfolio" title="Portfolio"><i class="bi bi-grid-3x3-gap"></i></a>
+    <a href="#testimonials" title="Testimonials"><i class="bi bi-chat-quote"></i></a>
+    <a href="#contact" title="Contact"><i class="bi bi-send"></i></a>
+  </div>
+
+  <main class="container py-4 py-lg-5">
+    <div class="shell">
+
+      <!-- SIDEBAR (desktop) -->
+      <aside class="side d-none d-lg-block">
+        <div class="d-flex align-items-center gap-3 mb-3">
+          <img class="avatar-xl" src="https://raw.githubusercontent.com/CHARITHREDDY30/My_Portfolio/497f025c13f171e1bf180eee9361c9bcd65e944b/1000145336.png" alt="avatar"/>
+          <div>
+            <div class="name h5 mb-1">CHARITH</div>
+            <div class="role">Data Analyst / Power BI Developer</div>
+          </div>
+        </div>
+        <hr class="opacity-25">
+        <nav id="sideNav" class="nav nav-pills flex-column nav-vertical gap-1">
+          <a class="nav-link active" href="#home"><span class="dot"></span> Home</a>
+          <a class="nav-link" href="#about"><span class="dot"></span> About Me</a>
+          <a class="nav-link" href="#resume"><span class="dot"></span> Resume</a>
+          <a class="nav-link" href="#portfolio"><span class="dot"></span> Portfolio</a>
+          <a class="nav-link" href="#case-studies"><span class="dot"></span> Case Studies</a>
+          <a class="nav-link" href="#contact"><span class="dot"></span> Contact</a>
+        </nav>
+        <div class="mt-auto small opacity-75 pt-3">© <span id="yr"></span> Charithreddy</div>
+      </aside>
+
+      <!-- MOBILE HEADER + CONTENT -->
+      <div>
+        <!-- Mobile mini header -->
+        <div class="d-lg-none mb-3">
+          <div class="d-flex align-items-center gap-3 p-3 section-card">
+            <img class="avatar-xl" style="width:72px;height:72px" src="https://raw.githubusercontent.com/CHARITHREDDY30/My_Portfolio/497f025c13f171e1bf180eee9361c9bcd65e944b/1000145336.png" alt="avatar"/>
+            <div class="flex-grow-1">
+              <div class="fw-bold">TATEKALAVA CHARITH REDDY</div>
+              <div class="small text-muted">Data Analyst | Power BI Developer</div>
+            </div>
+            <button class="btn btn-dark btn-sm" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu"><i class="bi bi-list"></i></button>
+          </div>
+          <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title">Menu</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <nav class="nav flex-column gap-2">
+                <a class="nav-link" href="#home" data-bs-dismiss="offcanvas">Home</a>
+                <a class="nav-link" href="#about" data-bs-dismiss="offcanvas">About</a>
+                <a class="nav-link" href="#resume" data-bs-dismiss="offcanvas">Resume</a>
+                <a class="nav-link" href="#portfolio" data-bs-dismiss="offcanvas">Portfolio</a>
+                <a class="nav-link" href="#testimonials" data-bs-dismiss="offcanvas">Testimonials</a>
+                <a class="nav-link" href="#contact" data-bs-dismiss="offcanvas">Contact</a>
+              </nav>
+            </div>
+          </div>
+        </div>
+
+        <!-- HERO -->
+        <section id="home" class="hero mb-4 mb-lg-5">
+          <span class="halo" aria-hidden="true"></span>
+          <div class="row g-4 align-items-center">
+            <div class="col-lg-7 order-2 order-lg-1">
+              <div class="hero-badge mb-2">HI THERE!</div>
+              <h1 class="display-5 fw-bold">
+                I'm <span class="text-warning">CHARITH REDDY T</span>
+              </h1>
+              <p class="lead text-secondary mt-2">
+                Data Analyst | Power BI Developer Enthusiast - transforming raw data into actionable insights that drive business growth. Skilled in Data Visualization,Analytics, and Automation using Power BI, Excel, SQL, and Python.
+              </p>
+              <div class="d-flex gap-2 mt-3">
+                <a href="#contact" class="btn btn-dark btn-dark-pill">Hire Me</a>
+                <a href="#portfolio" class="btn btn-outline-dark btn-dark-pill">See Portfolio</a>
+              </div>
+            </div>
+            <div class="col-lg-5 order-1 order-lg-2 text-center">
+              <img class="img-fluid rounded-circle" style="max-width:320px" src="https://images.unsplash.com/photo-1517495306984-937f064f09f2?q=80&w=900&auto=format&fit=crop" alt="hero">
+            </div>
+          </div>
+        </section>
+
+
+    
+         <!-- ABOUT -->
+        <section id="about" class="mb-4 mb-lg-5 section-card p-4 p-lg-5">
+          <div class="row g-4 align-items-start">
+            <div class="col-lg-7">
+              <h2 class="heading mb-2">— ABOUT ME</h2>
+              <p class="text-secondary">
+                I'm <strong>Charith Reddy</strong>, a data-driven analyst passionate about uncovering insights that boost business performance. I specialize in Power BI, Excel, SQL, and Python, turning complex data into clear, actionable visuals that tell impactful stories.
+              </p>
+              <div class="row g-3 mt-2">
+                <div class="col-md-12"><div class="service"><i class="bi bi-brush"></i><div><strong>Data Visualization</strong><div class="muted small">Interactive dashboards and reports using Power BI & Excel for business insights.</div></div></div></div>
+                <div class="col-md-12"><div class="service"><i class="bi bi-window"></i><div><strong>Data Analysis</strong><div class="muted small">Transforming raw data into trends, KPIs, and actionable insights with SQL & Python.</div></div></div></div>
+                <div class="col-md-12"><div class="service"><i class="bi bi-camera"></i><div><strong>Business Intelligence</strong><div class="muted small">Building data-driven solutions that improve decision-making and operational efficiency.</div></div></div></div>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="row g-3">
+                <div class="col-6"><div class="kpi"><h3 id="kpi-exp">0</h3><small>Years Experience</small></div></div>
+                <div class="col-6"><div class="kpi"><h3 id="kpi-proj">0</h3><small>Projects Done</small></div></div>
+                <div class="col-6"><div class="kpi"><h3 id="kpi-awd">0</h3><small>Tools</small></div></div>
+                <div class="col-6"><div class="kpi"><h3 id="kpi-clients">0</h3><small>Commitment</small></div></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+
+        <!-- RESUME -->
+        <section id="resume" class="mb-4 mb-lg-5 section-card p-4 p-lg-5">
+          <h2 class="heading mb-3">— RESUME</h2>
+          <div class="row g-4">
+            <div class="col-lg-6">
+              <h5 class="fw-bold mb-2">Education</h5>
+              <div class="timeline">
+                <div class="tl-item">
+                  <div class="d-flex justify-content-between">
+                    <div class="fw-semibold">B.Tech in Electronics & Communication Engineering</div>
+                    <span class="badge bg-dark badge-pill">2022 – 2025</span>
+                  </div>
+                  <div class="muted small">Krishna University</div>
+                  <p class="mt-2 small text-secondary">Focused on Data Analytics, Embedded systems and information processing, bridging technology with real-world business insights.</p>
+                </div>
+                <div class="tl-item">
+                  <div class="d-flex justify-content-between">
+                    <div class="fw-semibold">Diploma in Electronics & Communication Engineering</div>
+                    <span class="badge bg-dark badge-pill">2019 - 2022</span>
+                  </div>
+                  <div class="muted small">Government polytechnic, Chandragiri</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <h5 class="fw-bold mb-2">Experience</h5>
+              <div class="timeline">
+                <div class="tl-item">
+                  <div class="d-flex justify-content-between">
+                    <div class="fw-semibold">Data Analyst Intern</div>
+                    <span class="badge bg-warning text-dark badge-pill">APR 2025 – JUN 2025</span>
+                  </div>
+                  <p class="mt-2 small text-secondary">Worked on business data analysis, build Power BI dashboards, and automated reports for internal teams.</p>
+                </div>
+                <div class="tl-item">
+                  <div class="d-flex justify-content-between">
+                    <div class="fw-semibold">Power BI Developer Intern</div>
+                    <span class="badge bg-dark badge-pill">AUG2025 – OCT2025</span>
+                  </div>
+                  <p class="mt-2 small text-secondary">Developed Power BI dashboards using SQL data; collaborated with teams to deliver client-ready reports.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- PORTFOLIO -->
+<section id="portfolio" class="mb-4 mb-lg-5 section-card p-4 p-lg-5">
+  <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
+    <h2 class="heading m-0">— PORTFOLIO</h2>
+    <div class="filter-btns" id="filters">
+      <button class="btn btn-outline-dark btn-sm active" data-filter="*">All</button>
+      <button class="btn btn-outline-dark btn-sm" data-filter="dashboard">Dashboards</button>
+      <button class="btn btn-outline-dark btn-sm" data-filter="analysis">Analysis</button>
+      <button class="btn btn-outline-dark btn-sm" data-filter="ml">Machine Learning</button>
+    </div>
+  </div>
+
+  <div class="portfolio-grid" id="grid">
+    <!-- Project 1 -->
+    <article class="work" data-cat="dashboard">
+      <img src="https://www.fsm.ac.in/blog/wp-content/uploads/2022/08/download-2.jpg" alt="Healthcare Dashboard"/>
+      <span class="badge text-bg-warning">Dashboard</span>
+      <div class="overlay p-3">
+        <div>
+          <h6 class="mb-1">Healthcare Analytics</h6>
+          <div class="small">Excel / MySQL / Power BI / Patient Insights</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 2 -->
+    <article class="work" data-cat="analysis">
+      <img src="https://inc42.com/wp-content/uploads/2022/11/zomato-ft-3-1-760x570.png" alt="Zomato Sales"/>
+      <span class="badge text-bg-warning">Analysis</span>
+      <div class="overlay p-3">
+        <div>
+          <h6 class="mb-1">Zomato Sales Insights</h6>
+          <div class="small">SQL / Power BI</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 3 -->
+    <article class="work" data-cat="dashboard">
+      <img src="https://miro.medium.com/v2/resize:fit:975/1*vYtAOQyOjLPyQRjceAvvag.png" alt="Finance Project"/>
+      <span class="badge text-bg-warning">Dashboard</span>
+      <div class="overlay p-3">
+        <div>
+          <h6 class="mb-1">Finance Performance</h6>
+          <div class="small">Excel / Power BI</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 4 -->
+    <article class="work" data-cat="analysis">
+      <img src="https://static.vecteezy.com/system/resources/previews/002/161/921/large_2x/consumer-behavior-analysis-icons-free-vector.jpg" alt="Customer Behaviour Analysis"/>
+      <span class="badge text-bg-warning">Analysis</span>
+      <div class="overlay p-3">
+        <div>
+          <h6 class="mb-1">Customer Behaviour Analysis</h6>
+          <div class="small">Python / Visualization</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 5 -->
+    <article class="work" data-cat="ml">
+      <img src="https://blog.brandbastion.com/hubfs/social-media-analytics.png#keepProtocol" alt="Social Media Analysis"/>
+      <span class="badge text-bg-warning">Analysis</span>
+      <div class="overlay p-3">
+        <div>
+          <h6 class="mb-1">Social Media Analysis</h6>
+          <div class="small">Python / Machine Learning</div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- CINEMATIC MODAL -->
+<div class="overlay-modal" id="overlayModal">
+  <div class="modal-card" id="modalCard">
+    <span class="close-btn" id="closeBtn">×</span>
+    <div class="modal-left">
+      <img src="" id="modalImg" alt="Project Preview">
+    </div>
+    <div class="modal-right">
+      <div class="modal-info">
+        <h2 id="modalTitle">Project Title</h2>
+        <p id="modalDesc">Project description goes here dynamically when you click on a project.</p>
+      </div>
+      <div class="modal-actions">
+        <a href="#" target="_blank" id="modalGithub" class="btn-icon" title="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M12 .5A12 12 0 0 0 0 12.5c0 5.3 3.4 9.8 8.2 11.4.6.1.8-.3.8-.6v-2.1c-3.4.7-4.1-1.4-4.1-1.4-.6-1.6-1.5-2-1.5-2-1.2-.8.1-.8.1-.8 1.3.1 2 1.4 2 1.4 1.1 1.9 2.9 1.4 3.6 1 .1-.8.5-1.4.9-1.8-2.7-.3-5.5-1.4-5.5-6.2 0-1.4.5-2.6 1.3-3.6-.1-.4-.6-1.8.1-3.7 0 0 1-.3 3.4 1.3a11.9 11.9 0 0 1 6.2 0c2.4-1.6 3.4-1.3 3.4-1.3.7 1.9.2 3.3.1 3.7.8 1 1.3 2.2 1.3 3.6 0 4.8-2.8 5.9-5.6 6.2.5.4.9 1.2.9 2.5v3.7c0 .3.2.7.9.6A12 12 0 0 0 12 .5z"/></svg>
+        </a>
+        <a href="#" target="_blank" id="modalLive" class="btn-live">Live Demo</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.overlay-modal {
+  position:fixed;inset:0;display:none;justify-content:center;align-items:center;
+  background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);z-index:2000;
+}
+.modal-card {
+  display:flex;background:#1a1a1a;color:#fff;border-radius:16px;overflow:hidden;
+  box-shadow:0 30px 90px rgba(0,0,0,0.6);transition:all .45s cubic-bezier(.2,.9,.3,1);
+  position:absolute;opacity:0;transform:scale(0.92);z-index:2100;
+}
+.modal-left{flex:1;overflow:hidden;}
+.modal-left img{width:100%;height:100%;object-fit:cover;}
+.modal-right{flex:1;padding:40px;display:flex;flex-direction:column;justify-content:space-between;}
+.modal-info h2{font-size:2rem;color:#ff9500;margin-bottom:10px;}
+.modal-info p{color:#ddd;line-height:1.6;font-size:0.95rem;}
+.modal-actions{display:flex;justify-content:space-between;align-items:center;}
+.btn-icon{display:inline-flex;align-items:center;justify-content:center;background:transparent;border:2px solid #fff;border-radius:8px;padding:8px;color:#fff;transition:0.3s;}
+.btn-icon:hover{background:#fff;color:#000;}
+.btn-live{text-decoration:none;padding:10px 18px;border-radius:8px;background:#ff9500;color:#000;font-weight:600;transition:0.3s;}
+.btn-live:hover{background:#fff;color:#000;}
+.close-btn{position:absolute;top:18px;right:24px;font-size:28px;cursor:pointer;color:#fff;}
+.show-modal .modal-card{opacity:1;transform:scale(1);}
+@media(max-width:900px){.modal-card{flex-direction:column;width:90%;height:auto;}.modal-left{height:240px;}}
+</style>
+
+<script>
+const projectDetails = {
+  "Healthcare Analytics": {
+    title: "Healthcare Analytics Dashboard",
+    desc: "Built an interactive Power BI dashboard to analyze patient admissions, doctor performance, and key hospital KPIs. The project includes data cleaning, modeling, and DAX calculations, with visuals that track bed occupancy, patient flow, and department-wise workload. Helps hospital managers quickly spot issues, improve efficiency, and make data-driven decisions.",
+    img: "https://www.ache.org/-/media/ache/blog/using_data_analytics_1200x628_twig.png",
+    github: "https://github.com/CHARITHREDDY30/Healthcare_Analysis",
+    live: "https://app.powerbi.com/groups/me/reports/2b9b9b65-8a5a-4136-9106-2078cfa61180/ReportSection2717a3392c727f0c885e?experience=power-bi"
+  },
+  "Zomato Sales Insights": {
+    title: "Zomato Sales Insights",
+    desc: "Built a Power BI dashboard that simplifies sales trends, city performance, and user behavior. The final visuals give 30% clearer trend visibility, 20% better identification of low-performing cities, and make user patterns like peak hours and repeat orders easier to understand at a glance. Overall, the dashboard helps teams make faster, more confident decisions.",
+    img: "https://img.republicworld.com/all_images/zomato-thumb-1718879652294-16_9.webp",
+    github: "https://github.com/CHARITHREDDY30/Zomato_sales_analysis",
+    live: "https://app.powerbi.com/groups/me/reports/ef8983d4-a3e7-443b-b913-304ef67d5e6b/ReportSection?experience=power-bi"
+  },
+  "Finance Performance": {
+    title: "Finance Performance Report",
+    desc: "Analyzed revenue, expenses, and profit trends to give 35% clearer visibility into financial performance and faster identification of cost-heavy areas. The insights help teams make quick, confident budgeting and cashflow decisions.",
+    img: "https://enterprisewired.com/wp-content/uploads/2024/01/2-Corporate-Finance_-Driving-Financial-Strategy-and-Growth.jpg",
+    github: "https://github.com/CHARITHREDDY30/Finance_Performance_Report",
+    live: "https://app.powerbi.com/groups/me/reports/18203eaa-381b-49b3-9b39-857e35e5796d/887e498d2e00100e59d5?experience=power-bi"
+  },
+  "Customer Behaviour Analysis": {
+    title: "Customer Behaviour Analysis",
+    desc: "Analyzed customer purchase behaviour, product preferences, and overall spending patterns to uncover what drives sales. The project provided clear visibility into fast-moving products, better understanding of high-value customer segments, and sharper insights into seasonal demand shifts. These findings help businesses improve pricing, plan targeted promotions, and manage inventory with more confidence.",
+    img: "https://watermark.lovepik.com/photo/20211120/large/lovepik-concept-map-of-consumer-shopping-analysis-picture_500471756.jpg",
+    github: "https://github.com/CHARITHREDDY30/Customer_Behavior_Analysis",
+    live: "https://app.powerbi.com/groups/me/reports/399aa4a4-3289-4b89-887c-3d75fce64a1b/d6af3edb7208a591d753?experience=power-bi"
+  },
+  "Social Media Analysis": {
+    title: "Social-Media Analysis",
+    desc: "Built a supervised ML model using Python to detect fraudulent transactions. Achieved 97% accuracy with optimized feature selection and data balancing.",
+    img: "https://www.howtoincreasedomainauthority.com/wp-content/uploads/2023/02/Social-Media-Analysis.jpg",
+    github: "https://github.com/CHARITHREDDY30/Social_Media_Analysis",
+    live: "#"
+  }
+};
+
+const overlayModal = document.getElementById("overlayModal");
+const modalCard = document.getElementById("modalCard");
+const modalImg = document.getElementById("modalImg");
+const modalTitle = document.getElementById("modalTitle");
+const modalDesc = document.getElementById("modalDesc");
+const modalGithub = document.getElementById("modalGithub");
+const modalLive = document.getElementById("modalLive");
+const closeBtn = document.getElementById("closeBtn");
+
+let activeIndex = -1;
+
+/* Animate modal from clicked image position */
+function openModal(el){
+  const title = el.querySelector("h6").innerText.trim();
+  const data = projectDetails[title];
+  if(!data) return;
+  const rect = el.getBoundingClientRect();
+  modalTitle.textContent = data.title;
+  modalDesc.textContent = data.desc;
+  modalImg.src = data.img;
+  modalGithub.href = data.github;
+  modalLive.href = data.live;
+
+  overlayModal.style.display="flex";
+  modalCard.style.left = rect.left+"px";
+  modalCard.style.top = rect.top+"px";
+  modalCard.style.width = rect.width+"px";
+  modalCard.style.height = rect.height+"px";
+  modalCard.style.opacity="0";
+
+  void modalCard.offsetWidth;
+
+  const vw = window.innerWidth, vh = window.innerHeight;
+  const w = Math.min(1000, vw*0.85), h = Math.min(700, vh*0.75);
+  const left = (vw - w)/2, top = (vh - h)/2;
+
+  requestAnimationFrame(()=>{
+    modalCard.style.transition="all .45s cubic-bezier(.2,.9,.3,1)";
+    modalCard.style.left = left+"px";
+    modalCard.style.top = top+"px";
+    modalCard.style.width = w+"px";
+    modalCard.style.height = h+"px";
+    modalCard.style.opacity="1";
+  });
+  document.body.style.overflow="hidden";
+}
+
+/* Close modal */
+function closeModal(){
+  modalCard.style.transition="all .35s cubic-bezier(.2,.9,.3,1)";
+  modalCard.style.opacity="0";
+  setTimeout(()=>{
+    overlayModal.style.display="none";
+    document.body.style.overflow="";
+  },400);
+}
+
+/* Event binding */
+document.querySelectorAll(".work").forEach(w=>w.addEventListener("click",()=>openModal(w)));
+closeBtn.addEventListener("click",closeModal);
+overlayModal.addEventListener("click",e=>{if(e.target===overlayModal)closeModal();});
+</script>
+
+      
+
+        <!-- case study -->
+        <!-- ===== CASE STUDIES SECTION ===== -->
+<section id="case-studies" style="margin-top: 80px;">
+  <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 25px;">— CASE STUDIES</h2>
+
+  <div style="
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;">
+    
+    <!-- Case Study 1 -->
+    <div style="background: #fff; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 25px;">
+      <h3 style="color: #ff9500; font-size: 1.2rem; font-weight: 600;">Sales Insights Dashboard</h3>
+      <p style="color: #555; margin: 10px 0;">
+        Built an interactive Power BI dashboard to visualize regional and product-level sales, improving executive reporting efficiency by 35%.
+      </p>
+      <p style="font-size: 0.9rem; color: #888;">Tools: Power BI, Excel, DAX</p>
+    </div>
+
+    <!-- Case Study 2 -->
+    <div style="background: #fff; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 25px;">
+      <h3 style="color: #ff9500; font-size: 1.2rem; font-weight: 600;">Customer Retention Analysis</h3>
+      <p style="color: #555; margin: 10px 0;">
+        Analyzed churn trends and customer behavior using Python and Power BI, uncovering key retention factors for business strategy.
+      </p>
+      <p style="font-size: 0.9rem; color: #888;">Tools: Python, Pandas, Power BI</p>
+    </div>
+
+    <!-- Case Study 3 -->
+    <div style="background: #fff; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 25px;">
+      <h3 style="color: #ff9500; font-size: 1.2rem; font-weight: 600;">Credit Card Fraud Detection</h3>
+      <p style="color: #555; margin: 10px 0;">
+        Developed a machine learning model using classification algorithms to detect fraudulent transactions with 92% accuracy.
+      </p>
+      <p style="font-size: 0.9rem; color: #888;">Tools: Python, Scikit-learn, Matplotlib</p>
+    </div>
+
+    <!-- Case Study 4 -->
+    <div style="background: #fff; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 25px;">
+      <h3 style="color: #ff9500; font-size: 1.2rem; font-weight: 600;">Sales Forecasting</h3>
+      <p style="color: #555; margin: 10px 0;">
+        Created a time-series model and Power BI visualization to forecast next-quarter sales trends, supporting business planning.
+      </p>
+      <p style="font-size: 0.9rem; color: #888;">Tools: Excel, Power BI, Time Series</p>
+    </div>
+  </div>
+</section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="mb-2 mb-lg-4">
+          <div class="row g-3">
+            <div class="col-lg-7">
+              <div class="contact-card p-4 p-lg-5">
+                <h2 class="heading mb-3">— CONTACT</h2>
+                <p class="text-secondary">Feel free to reach out for collaborations or just a friendly hello 👋</p>
+               <form id="contact-form">
+  <input type="text" name="from_name" placeholder="Your Name" required>
+  <input type="email" name="from_email" placeholder="Your Email" required>
+  <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+  <button type="submit" class="btn btn-dark btn-dark-pill">
+    <i class="bi bi-send me-1"></i> Send Message
+  </button>
+</form>
+
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="section-card p-4 p-lg-5 h-100">
+                <div class="d-flex flex-column gap-3">
+                  <div class="d-flex align-items-start gap-3">
+                    <div class="fs-4"><i class="bi bi-telephone"></i></div>
+                    <div>
+                      <div class="fw-semibold">Phone</div>
+                      <div class="text-secondary">+91 9121798653</div>
+                    </div>
+                  </div>
+                  <div class="divider"></div>
+                  <div class="d-flex align-items-start gap-3">
+                    <div class="fs-4"><i class="bi bi-envelope"></i></div>
+                    <div>
+                      <div class="fw-semibold">Email</div>
+                      <div class="text-secondary">charithreddytatekalava@gmail.com</div>
+                    </div>
+                  </div>
+                  <div class="divider"></div>
+                  <div class="d-flex align-items-start gap-3">
+                    <div class="fs-4"><i class="bi bi-geo-alt"></i></div>
+                    <div>
+                      <div class="fw-semibold">Location</div>
+                      <div class="text-secondary">Tirupati, Andhra Pradesh</div>
+                    </div>
+                  </div>
+                  <div class="divider"></div>
+                  <div class="d-flex align-items-center gap-2">
+                    <a class="btn btn-outline-dark btn-sm" href="#"><i class="bi bi-instagram"></i></a>
+                    <a class="btn btn-outline-dark btn-sm" href="#"><i class="bi bi-twitter-x"></i></a>
+                    <a class="btn btn-outline-dark btn-sm" href="https://www.linkedin.com/in/charithreddy-tatekalava-335b06308/"><i class="bi bi-linkedin"></i></a>
+        
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="text-center small text-muted py-3">Thanks for patience!</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Back to top -->
+  <button id="toTop" class="btn btn-dark position-fixed" style="right:16px; bottom:16px; border-radius:999px; display:none"><i class="bi bi-arrow-up"></i></button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Year
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // Animated counters in About
+    const counters = [
+      { id:'kpi-exp', target: 1 },
+      { id:'kpi-proj', target: 4 },
+      { id:'kpi-awd', target: 65 },
+      { id:'kpi-clients', target: 300 }
+    ];
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          counters.forEach(({id, target})=>{
+            const el = document.getElementById(id);
+            if(el.dataset.done) return;
+            let cur = 0; const step = Math.ceil(target/50);
+            const t = setInterval(()=>{ cur += step; if(cur>=target){ cur=target; clearInterval(t);} el.textContent = cur + (id==='kpi-clients'?'+' :''); }, 30);
+            el.dataset.done = 1;
+          });
+        }
+      })
+    }, {threshold: .3});
+    io.observe(document.querySelector('#about'));
+
+    // Portfolio filter
+    const grid = document.getElementById('grid');
+    const buttons = document.querySelectorAll('#filters .btn');
+    buttons.forEach(btn=>btn.addEventListener('click', ()=>{
+      buttons.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      [...grid.children].forEach(card=>{
+        const show = (f==='*' || card.dataset.cat===f);
+        card.style.display = show ? '' : 'none';
+      });
+    }));
+
+    // Back to top button
+    const topBtn = document.getElementById('toTop');
+    window.addEventListener('scroll', ()=>{
+      topBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
+    topBtn.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+  </script>
+
+  <!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+  (function() {
+    emailjs.init("YOUR_PUBLIC_KEY"); // Example: "public_xxxxx"
+  })();
+
+  document.getElementById("contact-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    emailjs.sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", this)
+      .then(function() {
+        alert("✅ Message sent successfully!");
+      }, function(error) {
+        alert("❌ Failed to send message. Please try again later.");
+        console.error("EmailJS Error:", error);
+      });
+
+    this.reset(); // clears the form after submission
+  });
+</script>
+
+</body>
+</html>
