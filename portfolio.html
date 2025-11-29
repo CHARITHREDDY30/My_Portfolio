@@ -216,7 +216,7 @@ html {
               </div>
             </div>
             <div class="col-lg-5 order-1 order-lg-2 text-center">
-              <img class="img-fluid rounded-circle" style="max-width:320px" src="https://images.unsplash.com/photo-1517495306984-937f064f09f2?q=80&w=900&auto=format&fit=crop" alt="hero">
+              <img class="img-fluid rounded-circle" style="max-width:320px" src="https://static.vecteezy.com/system/resources/previews/010/718/005/original/business-analyst-illustration-concept-on-white-background-vector.jpg" alt="hero">
             </div>
           </div>
         </section>
@@ -259,7 +259,7 @@ html {
               <div class="timeline">
                 <div class="tl-item">
                   <div class="d-flex justify-content-between">
-                    <div class="fw-semibold">B.Tech in Electronics & Communication Engineering</div>
+                    <div class="fw-semibold">B.Tech in Electronics & Communication Engineering - 83 % </div>
                     <span class="badge bg-dark badge-pill">2022 – 2025</span>
                   </div>
                   <div class="muted small">Krishna University</div>
@@ -267,7 +267,7 @@ html {
                 </div>
                 <div class="tl-item">
                   <div class="d-flex justify-content-between">
-                    <div class="fw-semibold">Diploma in Electronics & Communication Engineering</div>
+                    <div class="fw-semibold">Diploma in Electronics & Communication Engineering - 89 %</div>
                     <span class="badge bg-dark badge-pill">2019 - 2022</span>
                   </div>
                   <div class="muted small">Government polytechnic, Chandragiri</div>
@@ -576,14 +576,27 @@ overlayModal.addEventListener("click",e=>{if(e.target===overlayModal)closeModal(
               <div class="contact-card p-4 p-lg-5">
                 <h2 class="heading mb-3">— CONTACT</h2>
                 <p class="text-secondary">Feel free to reach out for collaborations or just a friendly hello 👋</p>
-               <form id="contact-form">
-  <input type="text" name="from_name" placeholder="Your Name" required>
-  <input type="email" name="from_email" placeholder="Your Email" required>
-  <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+              <form id="contact-form">
+  <div class="mb-3">
+    <label class="form-label fw-semibold">Your Name</label>
+    <input type="text" class="form-control" name="from_name" placeholder="Enter your name" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label fw-semibold">Your Email</label>
+    <input type="email" class="form-control" name="from_email" placeholder="Enter your email" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label fw-semibold">Your Message</label>
+    <textarea class="form-control" name="message" rows="4" placeholder="Write your message..." required></textarea>
+  </div>
+
   <button type="submit" class="btn btn-dark btn-dark-pill">
     <i class="bi bi-send me-1"></i> Send Message
   </button>
 </form>
+
 
               </div>
             </div>
@@ -642,9 +655,9 @@ overlayModal.addEventListener("click",e=>{if(e.target===overlayModal)closeModal(
     // Animated counters in About
     const counters = [
       { id:'kpi-exp', target: 1 },
-      { id:'kpi-proj', target: 4 },
-      { id:'kpi-awd', target: 65 },
-      { id:'kpi-clients', target: 300 }
+      { id:'kpi-proj', target: 7 },
+      { id:'kpi-awd', target: 15 },
+      { id:'kpi-clients', target: 50 }
     ];
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{
